@@ -1,10 +1,10 @@
-namespace _06.SumReversedNumbers
-{
     using System;
     using System.Collections.Generic;
     using System.Linq;
 
-    public class Program
+    namespace ConsoleNETCore
+{
+    class Program
     {
         public static void Main()
         {
