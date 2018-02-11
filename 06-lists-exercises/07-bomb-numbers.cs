@@ -1,10 +1,10 @@
-namespace _07.BombNumbers
-{
     using System;
     using System.Collections.Generic;
     using System.Linq;
 
-    public class StartUp
+namespace ConsoleNETCore
+{
+    class Program
     {
         public static void Main()
         {
