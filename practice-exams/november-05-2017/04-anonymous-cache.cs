@@ -22,7 +22,6 @@ namespace ConsoleNETCore
             string maxDataSetName = "";
             BigInteger maxDataSetValue = -1;
 
-            // Loop until break.
             while (true)
             {
                 // Read the command from the console.
@@ -37,8 +36,11 @@ namespace ConsoleNETCore
                     string[] inputArray = input.Split(' ').ToArray();
                     if (dataSets.ContainsKey(inputArray[4]))
                     {
+                        // If the dataSet exists, add the data.
                         dataSets[inputArray[4]].Add(inputArray[0], int.Parse(inputArray[2]));
                         dataSetDict[inputArray[4]] += int.Parse(inputArray[2]);
+
+                        // Check for the dataSet being bigger than the max dataSet.
                         if (dataSetDict[inputArray[4]] > maxDataSetValue)
                         {
                             maxDataSetValue = dataSetDict[inputArray[4]];
@@ -47,6 +49,7 @@ namespace ConsoleNETCore
                     }
                     else
                     {
+                        // If the dataSet does not exist, add the data to cache.
                         if (cache.ContainsKey(inputArray[4]))
                             cache[inputArray[4]].Add(inputArray[0], int.Parse(inputArray[2]));
                         else
@@ -60,9 +63,11 @@ namespace ConsoleNETCore
                 // Input is "dataSet" command.
                 else
                 {
+                    // Add the new dataSet.
                     dataSets.Add(input, new Dictionary<string, int>());
                     dataSetDict.Add(input, 0);
 
+                    // Check cache for any data from this dataSet and add it.
                     if (cache.ContainsKey(input))
                     {
                         foreach (var item in cache[input])
@@ -71,7 +76,8 @@ namespace ConsoleNETCore
                             dataSetDict[input] += item.Value;
                         }
 
-                        if(dataSetDict[input] > maxDataSetValue)
+                        // Check for the dataSet being bigger than the max dataSet.
+                        if (dataSetDict[input] > maxDataSetValue)
                         {
                             maxDataSetValue = dataSetDict[input];
                             maxDataSetName = input;
@@ -80,6 +86,7 @@ namespace ConsoleNETCore
                 }
             }
 
+            // If there are any dataSets, print the output.
             if ((maxDataSetValue == -1) == false)
             {
                 Console.WriteLine($"Data Set: {maxDataSetName}, Total Size: {maxDataSetValue}");
